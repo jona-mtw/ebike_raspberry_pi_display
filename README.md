@@ -1,4 +1,4 @@
-# ebike_raspberry_pi_display
+# EBike RaspberryPI Display
 
 A new Flutter project.
 
@@ -15,3 +15,5 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Design: {Figma Design}(https://www.figma.com/files/team/1682872814337827286/folder/656998411?fuid=1682872812812178884)
