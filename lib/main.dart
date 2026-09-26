@@ -13,28 +13,81 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          body: Row(
+    return MaterialApp(home: Scaffold(body: MainBody()));
+  }
+}
+
+class MainBody extends StatefulWidget {
+  const MainBody({super.key});
+
+  @override
+  State<MainBody> createState() => _MainBodyState();
+}
+
+class _MainBodyState extends State<MainBody> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    HomePage(),
+    NavigationPage(),
+    TelemeteryPage(),
+    SettingsPage(),
+  ];
+
+  bool _extended = false;
+  final List<Widget> _menuState = [Icon(Icons.menu), Icon(Icons.close)];
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        NavigationRail(
+          mainAxisAlignment: .center,
+          extended: _extended,
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          leading: Row(
             children: [
-              CustomSideNavigationBar(),
-              Expanded(
-                flex: 5,
-                child: TabBarView(
-                  children: [
-                    HomePage(),
-                    NavigationPage(),
-                    TelemeteryPage(),
-                    SettingsPage(),
-                  ],
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _extended = !_extended;
+                  });
+                },
+                icon: _menuState[_extended ? 1 : 0],
+              ),
+              Visibility(
+                visible: _extended,
+                child: Container(
+                  padding: EdgeInsets.only(right: 175),
+                  child: Text(""),
                 ),
               ),
             ],
           ),
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home),
+              label: Text("Home"),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.navigation),
+              label: Text("Navigation"),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.insert_chart),
+              label: Text("Telemetery"),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.settings),
+              label: Text("Settings"),
+            ),
+          ],
         ),
-      ),
+        Expanded(child: _pages[_selectedIndex]),
+      ],
     );
   }
 }
@@ -44,52 +97,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Home"));
-  }
-}
-
-class CustomSideNavigationBar extends StatelessWidget {
-  const CustomSideNavigationBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return RotatedBox(
-      quarterTurns: 1,
-      child: Container(
-        color: Colors.white,
-        child: TabBar(
-          tabs: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Tab(icon: Icon(Icons.home, size: 30)),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Tab(icon: Icon(Icons.navigation_rounded, size: 30)),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Tab(icon: Icon(Icons.insert_chart, size: 30)),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Tab(icon: Icon(Icons.settings, size: 30)),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return Center(child: Text("Home"));
   }
 }
