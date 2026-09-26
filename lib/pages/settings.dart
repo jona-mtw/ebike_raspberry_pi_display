@@ -5,6 +5,11 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Settings"));
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 27, 31, 59),
+      body: Center(
+        child: Text("Settings", style: TextStyle(color: Colors.white)),
+      ),
+    );
   }
 }

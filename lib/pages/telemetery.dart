@@ -5,6 +5,11 @@ class TelemeteryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Telemetry"));
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 27, 31, 59),
+      body: Center(
+        child: Text("Telemetery", style: TextStyle(color: Colors.white)),
+      ),
+    );
   }
 }
