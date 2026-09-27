@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({super.key});
@@ -7,8 +8,18 @@ class NavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 27, 31, 59),
-      body: Center(
-        child: Text("Navigation", style: TextStyle(color: Colors.white)),
+      body: Container(
+        padding: EdgeInsets.only(top: 10, left: 20),
+        child: Column(
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              "Navigation",
+              style: GoogleFonts.kodchasan(fontSize: 30, color: Colors.white),
+            ),
+            Row(children: [Column(), Column()]),
+          ],
+        ),
       ),
     );
   }
