@@ -10,9 +10,15 @@ void main() {
   runApp(const MyApp());
 }
 
+var customDecoration = BoxDecoration(
+  color: Color.fromARGB(255, 119, 101, 227),
+  border: BoxBorder.all(color: Color.fromARGB(255, 55, 41, 98), width: 3),
+  borderRadius: BorderRadius.all(Radius.circular(30)),
+);
+var fontStyle = GoogleFonts.kodchasan(fontSize: 20, color: Colors.white);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -45,7 +51,7 @@ class CustomSideNavigationBar extends StatelessWidget {
     return Material(
       elevation: 50,
       child: Container(
-        color: Color.fromARGB(255, 27, 31, 59),
+        color: Colors.white,
         padding: EdgeInsets.only(top: 10),
         child: TabBar(
           tabs: [
@@ -92,8 +98,15 @@ class CustomSideNavigationBar extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const new({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  DateTime currentTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -104,11 +117,96 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            Text(
-              "My E-Bike",
-              style: GoogleFonts.kodchasan(fontSize: 30, color: Colors.white),
+            Row(
+              children: [
+                Text(
+                  "My E-Bike",
+                  style: GoogleFonts.kodchasan(
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  "$currentTime",
+                  style: GoogleFonts.kodchasan(
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
-            Row(children: [Column(), Column()]),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: customDecoration,
+                      child: Center(
+                        child: Text(
+                          "nav - also shows directions",
+                          style: fontStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: customDecoration,
+                                  child: Center(
+                                    child: Text("Hello", style: fontStyle),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: customDecoration,
+                                  child: Center(
+                                    child: Text("Hello", style: fontStyle),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: customDecoration,
+                                  child: Center(
+                                    child: Text("Hello", style: fontStyle),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: customDecoration,
+                                  child: Center(
+                                    child: Text("Hello", style: fontStyle),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
