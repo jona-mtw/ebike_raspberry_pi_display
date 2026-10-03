@@ -57,43 +57,83 @@ class _NavRailState extends State<NavRail> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        NavigationRail(
-          labelType: NavigationRailLabelType.all,
-          destinations: [
-            NavigationRailDestination(
-              icon: Icon(Icons.settings),
-              label: Text("General"),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.pedal_bike_rounded),
-              label: Text("Bike"),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.insert_chart_outlined_rounded),
-              label: Text("Telemetry"),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.notifications),
-              label: Text("Alert"),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.wifi),
-              label: Text("Connections"),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.code_rounded),
-              label: Text("Developer"),
-            ),
-          ],
-          onDestinationSelected: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          selectedIndex: _selectedIndex,
+        Container(
+          decoration: BoxDecoration(color: Colors.white),
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: .start,
+            mainAxisAlignment: .spaceAround,
+            children: [
+              CustomInkwell(
+                text: "General",
+                index: 0,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+              CustomInkwell(
+                text: "Bike",
+                index: 1,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+              CustomInkwell(
+                text: "Telemetry",
+                index: 2,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+              CustomInkwell(
+                text: "Alert",
+                index: 3,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+              CustomInkwell(
+                text: "Connection",
+                index: 4,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+              CustomInkwell(
+                text: "Developer",
+                index: 5,
+                onTap: (index) => setState(() => _selectedIndex = index),
+              ),
+            ],
+          ),
         ),
-        Expanded(child: pages[_selectedIndex]),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(5),
+            child: pages[_selectedIndex],
+          ),
+        ),
       ],
+    );
+  }
+}
+
+class CustomInkwell extends StatefulWidget {
+  final String text;
+  final int index;
+  final Function(int) onTap;
+
+  const CustomInkwell({
+    super.key,
+    required this.text,
+    required this.index,
+    required this.onTap,
+  });
+
+  @override
+  State<CustomInkwell> createState() => _CustomInkwellState();
+}
+
+class _CustomInkwellState extends State<CustomInkwell> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => widget.onTap(widget.index),
+      child: Container(
+        width: 150,
+        padding: EdgeInsets.only(top: 5, bottom: 5),
+        child: Text(widget.text, style: TextStyle(fontSize: 20)),
+      ),
     );
   }
 }
